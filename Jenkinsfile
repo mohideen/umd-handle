@@ -113,8 +113,24 @@ pipeline {
           # Configure MiniTest to use JUnit-style reporter
           export MINITEST_REPORTER=JUnitReporter
 
+          gem environment
+
+          ls -al /usr/local/bundle
+          ls -al /root/.gem/ruby/2.7.0
+          ls -al /usr/local/lib/ruby/gems/2.7.0
+
           # Update Chrome webdriver, if needed
-          RAILS_ENV=test bundle exec rails webdrivers:chromedriver:update
+          gem list
+          echo "----------------------------------------------------"
+          RAILS_ENV=test rails --tasks
+          echo "----------------------------------------------------"
+          RAILS_ENV=test rake --tasks
+          echo "----------------------------------------------------"
+          RAILS_ENV=test bundle exec rake --tasks
+          echo "----------------------------------------------------"
+          RAILS_ENV=test bundle exec rails --tasks
+          echo "----------------------------------------------------"
+          RAILS_ENV=test rails webdrivers:chromedriver:update
 
           bundle exec rails test:system test
         '''
